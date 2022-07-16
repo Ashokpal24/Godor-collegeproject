@@ -1,0 +1,513 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/UI/bg.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Ui_management.gd" type="Script" id=2]
+[ext_resource path="res://scripts/slot.gd" type="Script" id=3]
+[ext_resource path="res://assets/UI/slot.png" type="Texture" id=4]
+[ext_resource path="res://scripts/build.gd" type="Script" id=5]
+[ext_resource path="res://assets/UI/hotbar-bg.png" type="Texture" id=6]
+[ext_resource path="res://assets/character/player.png" type="Texture" id=7]
+[ext_resource path="res://scripts/player.gd" type="Script" id=8]
+[ext_resource path="res://assets/weapons/smg.png" type="Texture" id=9]
+[ext_resource path="res://assets/character/hand.png" type="Texture" id=10]
+
+[sub_resource type="CircleShape2D" id=5]
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "run"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "gunLeft"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("hand:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -6, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("hand:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "gunRight"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("hand:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -10.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -6, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("hand:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 1 ), Vector2( 1, 1 ) ]
+}
+
+[node name="player" type="KinematicBody2D"]
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 6 )
+shape = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 7 )
+hframes = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.5
+anims/idle = SubResource( 6 )
+anims/run = SubResource( 7 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="inv" type="TextureRect" parent="CanvasLayer/UI"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -272.0
+margin_top = -106.0
+margin_right = -22.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 250, 150 )
+texture = ExtResource( 1 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="grid" type="GridContainer" parent="CanvasLayer/UI/inv"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -92.0
+margin_top = -68.0
+margin_right = 92.0
+margin_bottom = 68.0
+custom_constants/vseparation = 8
+custom_constants/hseparation = 8
+columns = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slot1" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot2" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_left = 48.0
+margin_right = 88.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot3" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_left = 96.0
+margin_right = 136.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot4" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_left = 144.0
+margin_right = 184.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot5" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_top = 48.0
+margin_right = 40.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot6" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_left = 48.0
+margin_top = 48.0
+margin_right = 88.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot7" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_left = 96.0
+margin_top = 48.0
+margin_right = 136.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot8" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_left = 144.0
+margin_top = 48.0
+margin_right = 184.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot9" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_top = 96.0
+margin_right = 40.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot10" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_left = 48.0
+margin_top = 96.0
+margin_right = 88.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot11" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 136.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="slot12" type="Panel" parent="CanvasLayer/UI/inv/grid"]
+margin_left = 144.0
+margin_top = 96.0
+margin_right = 184.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="build" type="TextureRect" parent="CanvasLayer/UI"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 36.0
+margin_top = -109.0
+margin_right = 196.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 160, 150 )
+texture = ExtResource( 1 )
+stretch_mode = 1
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="output" type="Panel" parent="CanvasLayer/UI/build"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = 13.0
+margin_right = 50.0
+margin_bottom = 63.0
+rect_min_size = Vector2( 50, 50 )
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+type = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/build"]
+margin_left = 17.0
+margin_top = 33.0
+margin_right = 57.0
+margin_bottom = 47.0
+text = "??????"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/build"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -6.0
+margin_right = 67.0
+margin_bottom = 35.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slot1" type="Panel" parent="CanvasLayer/UI/build/HBoxContainer"]
+margin_right = 41.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 41, 41 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+type = 2
+partType = 1
+
+[node name="slot2" type="Panel" parent="CanvasLayer/UI/build/HBoxContainer"]
+margin_left = 49.0
+margin_right = 89.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+type = 2
+
+[node name="slot3" type="Panel" parent="CanvasLayer/UI/build/HBoxContainer"]
+margin_left = 97.0
+margin_right = 137.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+type = 2
+partType = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/UI/build"]
+margin_left = 54.0
+margin_top = 114.0
+margin_right = 104.0
+margin_bottom = 134.0
+text = "build"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hotbar" type="TextureRect" parent="CanvasLayer/UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -99.0
+margin_top = -77.0
+margin_right = 93.0
+margin_bottom = -29.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/hotbar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -88.0
+margin_top = -16.0
+margin_right = 88.0
+margin_bottom = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slot1" type="Panel" parent="CanvasLayer/UI/hotbar/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 4 )
+script = ExtResource( 3 )
+type = 1
+
+[node name="slot2" type="Panel" parent="CanvasLayer/UI/hotbar/HBoxContainer"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 4 )
+script = ExtResource( 3 )
+type = 1
+
+[node name="slot3" type="Panel" parent="CanvasLayer/UI/hotbar/HBoxContainer"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 4 )
+script = ExtResource( 3 )
+type = 1
+
+[node name="slot4" type="Panel" parent="CanvasLayer/UI/hotbar/HBoxContainer"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 4 )
+script = ExtResource( 3 )
+type = 1
+
+[node name="slot5" type="Panel" parent="CanvasLayer/UI/hotbar/HBoxContainer"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 4 )
+script = ExtResource( 3 )
+type = 1
+
+[node name="gunContainer" type="Node2D" parent="."]
+position = Vector2( -5, -2 )
+scale = Vector2( 0.7, 0.7 )
+
+[node name="hand" type="Sprite" parent="gunContainer"]
+texture = ExtResource( 10 )
+offset = Vector2( 18, -1 )
+
+[node name="gun" type="Sprite" parent="gunContainer/hand"]
+show_behind_parent = true
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 9 )
+offset = Vector2( 16, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="gunContainer"]
+anims/gunLeft = SubResource( 8 )
+anims/gunRight = SubResource( 9 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+process_mode = 0
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+
+[connection signal="pressed" from="CanvasLayer/UI/build/Button" to="CanvasLayer/UI/build" method="_on_Button_pressed"]
